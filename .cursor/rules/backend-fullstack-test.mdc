@@ -1,0 +1,25 @@
+---
+description: Standards backend Node Express TypeScript et tests API
+globs: back/**/*.ts
+alwaysApply: false
+---
+
+# Backend Full Stack & Test
+
+## Objectif
+Concevoir des APIs REST fiables, testees, et bien documentees.
+
+## Regles backend
+- Utiliser Node.js + Express + TypeScript avec separation claire routes/services.
+- Centraliser la gestion d'erreurs et retourner des reponses HTTP coherentes.
+- Encapsuler les integrations externes (PDFKit, DocuSign API) dans des services dedies.
+- Maintenir la documentation Swagger a jour pour chaque route exposee.
+
+## Regles de tests backend
+- Ajouter des tests unitaires sur la logique metier (services).
+- Ajouter des tests d'integration API avec Supertest sur routes critiques.
+- Viser >= 80% de couverture sur routes et services critiques.
+- Integrer les suites de tests dans la CI/CD et bloquer le merge en cas d'echec.
+
+## Exemple attendu
+- Nouvelle route Express: test service + test Supertest + mise a jour Swagger.
