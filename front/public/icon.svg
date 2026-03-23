@@ -1,0 +1,45 @@
+<svg width="180" height="180" viewBox="0 0 180 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- Fond : noir profond avec léger halo (soft lighting) -->
+    <radialGradient id="bgAmbient" cx="32%" cy="28%" r="85%" fx="32%" fy="28%">
+      <stop offset="0%" stop-color="#1c1a16"/>
+      <stop offset="45%" stop-color="#0d0c0a"/>
+      <stop offset="100%" stop-color="#000000"/>
+    </radialGradient>
+    <!-- Or raffiné type bijouterie / haute couture -->
+    <linearGradient id="goldPrimary" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f5ecd4"/>
+      <stop offset="22%" stop-color="#e8d5a8"/>
+      <stop offset="48%" stop-color="#c9a227"/>
+      <stop offset="72%" stop-color="#a8862a"/>
+      <stop offset="100%" stop-color="#6b5a2e"/>
+    </linearGradient>
+    <linearGradient id="goldHighlight" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0"/>
+      <stop offset="50%" stop-color="#fff8e7" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+    </linearGradient>
+    <filter id="softGlow" x="-15%" y="-15%" width="130%" height="130%" color-interpolation-filters="sRGB">
+      <feGaussianBlur stdDeviation="0.8" result="b"/>
+      <feMerge>
+        <feMergeNode in="b"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  <rect width="180" height="180" rx="36" fill="url(#bgAmbient)"/>
+  <!-- Reflet discret en haut -->
+  <rect width="180" height="180" rx="36" fill="url(#goldHighlight)" opacity="0.6"/>
+  <text
+    x="90"
+    y="94"
+    fill="url(#goldPrimary)"
+    font-family="Georgia, 'Palatino Linotype', Palatino, 'Times New Roman', Times, serif"
+    font-size="38"
+    font-weight="400"
+    letter-spacing="0.42em"
+    text-anchor="middle"
+    dominant-baseline="middle"
+    filter="url(#softGlow)"
+  >ROCH</text>
+</svg>
