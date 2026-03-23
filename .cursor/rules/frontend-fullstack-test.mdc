@@ -1,0 +1,26 @@
+---
+description: Standards frontend React TypeScript et tests UI
+globs: front/**/*.{ts,tsx}
+alwaysApply: false
+---
+
+# Frontend Full Stack & Test
+
+## Objectif
+Construire une interface React robuste, lisible, et testee sur les parcours critiques.
+
+## Regles frontend
+- Utiliser React + TypeScript avec composants clairs et hooks personnalises.
+- Structurer les formulaires avec validation explicite et gestion d'erreurs utilisateur.
+- Garder les composants presentionnels simples et extraire la logique metier dans des hooks/services.
+- Utiliser Tailwind CSS de maniere coherente et eviter les classes dupliquees.
+
+## Regles de tests frontend
+- Tests composants: Jest + RTL (`front/jest.config.cjs`, `front/jest.setup.ts`), fichiers sous `front/**/__tests__/*.test.tsx`. Commandes: `npm test`, `npm run test:coverage` (dossier `front/`).
+- E2E: Playwright (`front/playwright.config.ts`, `front/e2e/*.spec.ts`). Commande: `npm run test:e2e` (installe les navigateurs si besoin: `npx playwright install chromium`).
+- Couvrir les cas: rendu, interactions, validation, soumission, erreurs API.
+- Viser >= 80% de couverture sur ecrans et logique critiques.
+- CI: workflow racine `.github/workflows/ci.yml` (backend Jest, frontend Jest, Playwright).
+
+## Exemple attendu
+- Nouveau formulaire: tests RTL pour validation + soumission + erreurs backend.

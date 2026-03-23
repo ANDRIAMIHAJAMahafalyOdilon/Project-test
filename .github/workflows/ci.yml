@@ -1,0 +1,61 @@
+name: CI
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+    branches: [main, master]
+
+jobs:
+  backend-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: back/package-lock.json
+      - name: Install backend dependencies
+        working-directory: back
+        run: npm ci
+      - name: Run backend tests
+        working-directory: back
+        run: npm test
+
+  frontend-unit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: front/package-lock.json
+      - name: Install frontend dependencies
+        working-directory: front
+        run: npm ci
+      - name: Run Jest (RTL)
+        working-directory: front
+        run: npm test -- --ci
+
+  frontend-e2e:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: front/package-lock.json
+      - name: Install frontend dependencies
+        working-directory: front
+        run: npm ci
+      - name: Install Playwright Chromium
+        working-directory: front
+        run: npx playwright install --with-deps chromium
+      - name: Run Playwright
+        working-directory: front
+        env:
+          CI: true
+        run: npm run test:e2e
