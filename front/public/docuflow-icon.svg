@@ -1,0 +1,41 @@
+<svg width="180" height="180" viewBox="0 0 180 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient id="bg" cx="30%" cy="28%" r="85%" fx="30%" fy="28%">
+      <stop offset="0%" stop-color="#1c1a16"/>
+      <stop offset="45%" stop-color="#0d0c0a"/>
+      <stop offset="100%" stop-color="#000000"/>
+    </radialGradient>
+    <linearGradient id="accent" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f5ecd4"/>
+      <stop offset="26%" stop-color="#e8d5a8"/>
+      <stop offset="50%" stop-color="#c9a227"/>
+      <stop offset="75%" stop-color="#a8862a"/>
+      <stop offset="100%" stop-color="#6b5a2e"/>
+    </linearGradient>
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%" color-interpolation-filters="sRGB">
+      <feGaussianBlur stdDeviation="1" result="b"/>
+      <feMerge>
+        <feMergeNode in="b"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <rect width="180" height="180" rx="36" fill="url(#bg)"/>
+  <rect width="180" height="180" rx="36" fill="url(#accent)" opacity="0.08"/>
+
+  <!-- Document -->
+  <path d="M52 54c0-6.6 5.4-12 12-12h44l20 20v98c0 6.6-5.4 12-12 12H64c-6.6 0-12-5.4-12-12V54Z" stroke="url(#accent)" stroke-width="4" stroke-linejoin="round"/>
+  <path d="M108 42v24c0 4.4 3.6 8 8 8h24" stroke="url(#accent)" stroke-width="4" stroke-linejoin="round"/>
+
+  <!-- Flow arrows -->
+  <path d="M62 92h36" stroke="url(#accent)" stroke-width="5" stroke-linecap="round"/>
+  <path d="M92 84l14 8-14 8" stroke="url(#accent)" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <path d="M62 120h56" stroke="url(#accent)" stroke-width="5" stroke-linecap="round"/>
+  <path d="M104 112l14 8-14 8" stroke="url(#accent)" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Brand text -->
+  <text x="90" y="162" text-anchor="middle" dominant-baseline="middle" font-family="Georgia, 'Palatino Linotype', Palatino, serif" font-size="28" fill="url(#accent)" filter="url(#glow)">DocuFlow</text>
+</svg>
+
