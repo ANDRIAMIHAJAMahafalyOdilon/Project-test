@@ -149,7 +149,7 @@ export function InvoiceFormCard() {
             )}
           </div>
         </CardContent>
-        <CardFooter>
+        <CardFooter className="mt-3 pt-2">
           <Button
             type="submit"
             className="w-full"

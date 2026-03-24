@@ -1,0 +1,36 @@
+<svg width="320" height="72" viewBox="0 0 320 72" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="wm-bg" x1="8" y1="8" x2="64" y2="64" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#0F172A"/>
+      <stop offset="1" stop-color="#111827"/>
+    </linearGradient>
+    <linearGradient id="wm-gold" x1="16" y1="14" x2="58" y2="58" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#F8E9C8"/>
+      <stop offset="0.35" stop-color="#E7CE94"/>
+      <stop offset="0.65" stop-color="#CFA23A"/>
+      <stop offset="1" stop-color="#8B6A1D"/>
+    </linearGradient>
+    <linearGradient id="wm-text" x1="84" y1="18" x2="300" y2="58" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#F7E7C0"/>
+      <stop offset="0.5" stop-color="#E2C27A"/>
+      <stop offset="1" stop-color="#A47B24"/>
+    </linearGradient>
+  </defs>
+
+  <rect x="4" y="4" width="64" height="64" rx="16" fill="url(#wm-bg)"/>
+  <rect x="4.5" y="4.5" width="63" height="63" rx="15.5" stroke="#3B4455" stroke-opacity="0.45"/>
+
+  <!-- mark -->
+  <path d="M22 21C22 19.8954 22.8954 19 24 19H37L45 27V45C45 46.1046 44.1046 47 43 47H24C22.8954 47 22 46.1046 22 45V21Z" stroke="url(#wm-gold)" stroke-width="2.4" stroke-linejoin="round"/>
+  <path d="M37 19V24C37 24.8284 37.6716 25.5 38.5 25.5H45" stroke="url(#wm-gold)" stroke-width="2.4" stroke-linejoin="round"/>
+  <path d="M26 31H35" stroke="url(#wm-gold)" stroke-width="2.7" stroke-linecap="round"/>
+  <path d="M33 28.5L37 31L33 33.5" stroke="url(#wm-gold)" stroke-width="2.7" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M26 38H39" stroke="url(#wm-gold)" stroke-width="2.7" stroke-linecap="round"/>
+  <path d="M37 35.5L41 38L37 40.5" stroke="url(#wm-gold)" stroke-width="2.7" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- wordmark -->
+  <text x="82" y="45" fill="url(#wm-text)" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="30" font-weight="700" letter-spacing="0.02em">
+    DOCUFLOW
+  </text>
+</svg>
+

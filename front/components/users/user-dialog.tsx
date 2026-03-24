@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect } from 'react';
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
@@ -17,6 +18,7 @@ import {
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import { Alert, AlertDescription } from '@/components/ui/alert';
 import {
   Select,
   SelectContent,
@@ -45,6 +47,7 @@ export function UserDialog({ open, onOpenChange, user }: UserDialogProps) {
   const createUser = useCreateUser();
   const updateUser = useUpdateUser();
   const isEditing = !!user;
+  const [submitError, setSubmitError] = useState<string | null>(null);
 
   const {
     register,
@@ -81,9 +84,11 @@ export function UserDialog({ open, onOpenChange, user }: UserDialogProps) {
         role: 'user',
       });
     }
+    setSubmitError(null);
   }, [user, reset]);
 
   const onSubmit = async (data: UserFormData) => {
+    setSubmitError(null);
     try {
       if (isEditing) {
         await updateUser.mutateAsync({ id: user.id, data });
@@ -93,9 +98,12 @@ export function UserDialog({ open, onOpenChange, user }: UserDialogProps) {
           avatar: `https://api.dicebear.com/7.x/avataaars/svg?seed=${data.firstName}`,
         });
       }
+      setSubmitError(null);
       onOpenChange();
     } catch (error) {
-      console.error('Failed to save user:', error);
+      const message =
+        error instanceof Error ? error.message : "Impossible d'enregistrer l'utilisateur";
+      setSubmitError(message);
     }
   };
 
@@ -113,6 +121,11 @@ export function UserDialog({ open, onOpenChange, user }: UserDialogProps) {
           </DialogDescription>
         </DialogHeader>
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+          {submitError && (
+            <Alert variant="destructive">
+              <AlertDescription>{submitError}</AlertDescription>
+            </Alert>
+          )}
           <div className="grid gap-4 sm:grid-cols-2">
             <div className="space-y-2">
               <Label htmlFor="firstName">Prénom</Label>

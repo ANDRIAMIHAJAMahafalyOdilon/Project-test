@@ -98,31 +98,28 @@ export function AppSidebar() {
 
   return (
     <Sidebar collapsible="icon">
-      <SidebarHeader className="shrink-0 gap-0 border-b border-sidebar-border/60 !p-0">
+      <SidebarHeader className="shrink-0 gap-0 border-b border-sidebar-border/60 px-2 py-2">
         <Tooltip>
           <TooltipTrigger asChild>
             <Link
               href="/dashboard"
               aria-label="DocuFlow — Dashboard"
               className={cn(
-                'flex w-full min-w-0 max-w-full items-center justify-start outline-none transition-colors',
-                'hover:bg-sidebar-accent/45 focus-visible:ring-2 focus-visible:ring-sidebar-ring',
-                isRailCollapsed ? 'py-1.5' : 'py-2',
+                'flex w-full min-w-0 max-w-full items-center outline-none transition-colors',
+                'rounded-md hover:bg-sidebar-accent/45 focus-visible:ring-2 focus-visible:ring-sidebar-ring',
+                isRailCollapsed ? 'justify-center px-1 py-1.5' : 'justify-start px-2 py-2',
               )}
             >
-              {/* img natif : w-full s’applique vraiment sur toute la largeur (Next/Image gardait des tailles fixes) */}
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
-                src="/docuflow-icon.svg"
-                alt=""
+                src={isRailCollapsed ? '/docuflow-mark.svg' : '/docuflow-wordmark.svg'}
+                alt="DocuFlow"
                 className={cn(
-                  'block min-w-0 max-w-full object-contain object-left',
-                  'ml-0',
-                  /* Rail : petite zone */
-                  isRailCollapsed ? 'h-10 w-auto' : 'h-9 w-auto',
+                  'block min-w-0 max-w-full object-contain',
+                  isRailCollapsed ? 'h-9 w-9 object-center' : 'h-10 w-auto object-left',
                 )}
-                width={180}
-                height={180}
+                width={isRailCollapsed ? 96 : 320}
+                height={isRailCollapsed ? 96 : 72}
                 decoding="async"
               />
             </Link>

@@ -50,13 +50,36 @@ function PageBreadcrumb() {
 
 export default function ProtectedLayout({ children }: { children: ReactNode }) {
   const router = useRouter();
-  const { isAuthenticated, isLoading } = useAuth();
+  const { isAuthenticated, isLoading, refreshUser } = useAuth();
 
   useEffect(() => {
-    if (!isLoading && !isAuthenticated) {
-      router.replace('/');
-    }
-  }, [isAuthenticated, isLoading, router]);
+    let cancelled = false;
+
+    const guard = async () => {
+      if (isLoading || isAuthenticated) return;
+
+      // Évite une redirection prématurée juste après login
+      // (token écrit, mais contexte pas encore entièrement synchronisé).
+      const storedToken = localStorage.getItem('auth_token');
+      if (!storedToken) {
+        router.replace('/');
+        return;
+      }
+
+      await refreshUser();
+      if (cancelled) return;
+
+      const stillStoredToken = localStorage.getItem('auth_token');
+      if (!stillStoredToken) {
+        router.replace('/');
+      }
+    };
+
+    void guard();
+    return () => {
+      cancelled = true;
+    };
+  }, [isAuthenticated, isLoading, router, refreshUser]);
 
   if (isLoading) {
     return (

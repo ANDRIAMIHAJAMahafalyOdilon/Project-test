@@ -112,7 +112,7 @@ export default function LoginPage() {
               )}
             </div>
           </CardContent>
-          <CardFooter className="flex flex-col gap-4">
+          <CardFooter className="mt-4 flex flex-col gap-4 pt-3">
             <Button
               type="submit"
               className="w-full"

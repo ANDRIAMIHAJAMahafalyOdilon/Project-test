@@ -7,33 +7,25 @@ import { useAuth } from '@/contexts/auth-context';
 import type { LoginCredentials, RegisterData } from '@/types';
 
 export function useLogin() {
-  const router = useRouter();
   const { setAuth } = useAuth();
 
   return useMutation({
     mutationFn: (credentials: LoginCredentials) => login(credentials),
     onSuccess: (response) => {
       setAuth(response.data.user, response.data.token);
-      // Laisser React appliquer le contexte avant la navigation, sinon le layout
-      // protégé peut encore voir isAuthenticated === false et renvoyer vers l’accueil.
-      setTimeout(() => {
-        router.replace('/dashboard');
-      }, 0);
+      // La navigation est gérée par le guard auth (layout), après synchro du contexte.
     },
   });
 }
 
 export function useRegister() {
-  const router = useRouter();
   const { setAuth } = useAuth();
 
   return useMutation({
     mutationFn: (data: RegisterData) => register(data),
     onSuccess: (response) => {
       setAuth(response.data.user, response.data.token);
-      setTimeout(() => {
-        router.replace('/dashboard');
-      }, 0);
+      // La navigation est gérée par le guard auth (layout), après synchro du contexte.
     },
   });
 }

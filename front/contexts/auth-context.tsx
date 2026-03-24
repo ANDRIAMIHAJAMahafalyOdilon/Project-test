@@ -24,24 +24,53 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [token, setToken] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
-  // Initialize auth state from storage
+  // Rehydrate auth from storage and validate token at startup.
   useEffect(() => {
-    const storedToken = localStorage.getItem(AUTH_TOKEN_KEY);
-    const storedUser = localStorage.getItem(AUTH_USER_KEY);
+    let isMounted = true;
 
-    if (storedToken && storedUser) {
+    const initAuth = async () => {
+      const storedToken = localStorage.getItem(AUTH_TOKEN_KEY);
+      const storedUser = localStorage.getItem(AUTH_USER_KEY);
+
+      if (!storedToken || !storedUser) {
+        if (isMounted) setIsLoading(false);
+        return;
+      }
+
       try {
-        const parsedUser = JSON.parse(storedUser);
-        setToken(storedToken);
-        setUser(parsedUser);
+        JSON.parse(storedUser);
       } catch {
-        // Invalid stored data, clear it
         localStorage.removeItem(AUTH_TOKEN_KEY);
         localStorage.removeItem(AUTH_USER_KEY);
+        if (isMounted) setIsLoading(false);
+        return;
       }
-    }
 
-    setIsLoading(false);
+      try {
+        const response = await getCurrentUser(storedToken);
+        if (!isMounted) return;
+
+        if (response.success) {
+          setToken(storedToken);
+          setUser(response.data);
+          localStorage.setItem(AUTH_USER_KEY, JSON.stringify(response.data));
+        } else {
+          localStorage.removeItem(AUTH_TOKEN_KEY);
+          localStorage.removeItem(AUTH_USER_KEY);
+        }
+      } catch {
+        localStorage.removeItem(AUTH_TOKEN_KEY);
+        localStorage.removeItem(AUTH_USER_KEY);
+      } finally {
+        if (isMounted) setIsLoading(false);
+      }
+    };
+
+    void initAuth();
+
+    return () => {
+      isMounted = false;
+    };
   }, []);
 
   const setAuth = useCallback((newUser: User, newToken: string) => {
